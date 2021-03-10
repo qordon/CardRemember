@@ -18,35 +18,38 @@ kv = '''
         rows: 3
         spacing: 0
         BoxLayout:
-            size_hint: [0.33, 1]
+            size_hint: [1, 0.4]
         BoxLayout:
-            size_hint: [0.33, 1]
+            orientation: 'vertical'
+            size_hint: [0.5, 1]
             Image:
+                size_hint: [1, 1]
                 id: card_image
                 source: 'PNG/2C.png'
                 size: self.texture_size
             BoxLayout:
-                orientation: 'vertical'
-                padding: [10, 10, 50, 10]
+                size_hint: [1, 0.25]
+                # orientation: 'vertical'
+                padding: [35, 10, 35, 10]
                 spacing: 10
                 Button: 
-                    text: ">"
+                    text: "<"
                     font_size: "24"
                     on_press:
-                        root.click(1)
+                        root.click(-1)
                 Button:
                     text: "="
                     font_size: "24"
                     on_press:
                         root.click(0)
                 Button:
-                    text: "<"
+                    text: ">"
                     font_size: "24"
                     on_press:
-                        root.click(-1)
+                        root.click(1)
                     
         BoxLayout:
-            size_hint: [0.33, 1]
+            size_hint: [1, 0.4]
             Label:
                 id: right_amount
                 text: "Верно: 0"
