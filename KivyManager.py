@@ -54,6 +54,22 @@ kv = '''
                 id: right_amount
                 text: "Верно: 0"
                 font_size: "24"
+                
+<EndScreen>:
+    orientation: 'vertical'
+    right_amount: right_amount
+    
+    
+    BoxLayout:
+        
+    BoxLayout:
+        size_hint: [1, 1]
+        Label:
+            id: right_amount
+            font_size: "24"
+    BoxLayout:
+    
+    
 '''
 
 Builder.load_string(kv)
@@ -68,25 +84,38 @@ class MainScreen(Screen):
         self.card_image.source = "PNG/" + self.game_manager.get_current_card()[0]
 
     def click(self, state):
-        card, _ = self.game_manager.get_next_card()
-        self.card_image.source = "PNG/" + card
+        card, is_end = self.game_manager.get_next_card()
+        self.card_image.source = "PNG/" + card[0]
         print(card)
 
         if self.game_manager.check_answer(state):
             self.right_amount.text = "Верно: " + str(self.game_manager.win_number)
 
-
-gm = GameManager()
-sm = ScreenManager()
-ms = MainScreen(gm, name='menu')
-sm.add_widget(ms)
+        if is_end:
+            screen_manager.get_screen('end').ids.right_amount.text = self.right_amount.text
+            self.parent.current = 'end'
 
 
-class RoofApp(App):
+class EndScreen(Screen):
+    def __init__(self, game_manager, **kwargs):
+        super().__init__(**kwargs)
+        self.game_manager = game_manager
+
+    def myfunction(self):
+        self.right_amount.text = "Верно: " + str(game_manager.win_number)
+
+
+game_manager = GameManager()
+screen_manager = ScreenManager()
+screen_manager.add_widget(MainScreen(game_manager, name='menu'))
+screen_manager.add_widget(EndScreen(game_manager, name='end'))
+
+
+class CardRememberApp(App):
     def build(self):
-        return sm
+        return screen_manager
 
 
 if __name__ == "__main__":
-    ra = RoofApp().run()
+    CardRememberApp().run()
 

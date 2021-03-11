@@ -35,7 +35,10 @@ class GameManager:
         card = self.cards[self.iterator]
 
         print("Iterator_1: " + str(self.iterator))
-        return card
+        if self.iterator == 35:
+            self.is_end = True
+
+        return card, self.is_end
 
     def get_current_card(self):
         card = self.cards[self.iterator]
@@ -43,15 +46,15 @@ class GameManager:
 
     def check_answer(self, state):
         if state == 1:
-            if self.cards[self.iterator][1] > self.cards[self.iterator-1][1]:
+            if self.cards[self.iterator][1] > self.cards[self.iterator - 1][1]:
                 self.win_number += 1
                 return True
         elif state == 0:
-            if self.cards[self.iterator][1] == self.cards[self.iterator-1][1]:
+            if self.cards[self.iterator][1] == self.cards[self.iterator - 1][1]:
                 self.win_number += 1
                 return True
         elif state == -1:
-            if self.cards[self.iterator][1] < self.cards[self.iterator-1][1]:
+            if self.cards[self.iterator][1] < self.cards[self.iterator - 1][1]:
                 self.win_number += 1
                 return True
 
