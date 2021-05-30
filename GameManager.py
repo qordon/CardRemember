@@ -1,6 +1,21 @@
 import random
 
 
+def number_elements_greater_equal_or_less(coll, value):
+    number_greater = 0
+    number_equal = 0
+    number_less = 0
+    for i in coll:
+        if i > value:
+            number_greater += 1
+        elif i < value:
+            number_less += 1
+        elif i == value:
+            number_equal += 1
+
+    return number_greater, number_equal, number_less
+
+
 class GameManager:
     def __init__(self):
         # self.cards = [("6 крест", 6), ("6 пик", 6), ("6 черв", 6), ("6 бубей", 6),
@@ -24,11 +39,43 @@ class GameManager:
                       ("AC.png", 14), ("AS.png", 14), ("AD.png", 14), ("AH.png", 14)]
         self.iterator = 0
         self.win_number = 0
+        self.answers = []
+        self.expected_answers = []
+        self.probabilities = []
         self.is_end = False
         self.shuffle_deck()
 
     def shuffle_deck(self):
         random.shuffle(self.cards)
+
+    def calculate_probabilities(self):
+        card_costs = [6, 6, 6, 6,
+             7, 7, 7, 7,
+             8, 8, 8, 8,
+             9, 9, 9, 9,
+             10, 10, 10, 10,
+             11, 11, 11, 11,
+             12, 12, 12, 12,
+             13, 13, 13, 13,
+             14, 14, 14, 14]
+
+        for i in range(len(self.cards) - 1):
+            card_costs.remove(self.cards[i][1])
+            greater, equal, less = (number_elements_greater_equal_or_less(card_costs, self.cards[i][1]))
+            self.probabilities.append(tuple([round(greater / len(card_costs), 2),
+                                        round(equal / len(card_costs), 2),
+                                        round(less / len(card_costs), 2)]))
+            expected_choice = self.probabilities[-1].index(max(self.probabilities[-1]))
+            if expected_choice == 0:
+                self.expected_answers.append(1)
+            elif expected_choice == 1:
+                self.expected_answers.append(0)
+            elif expected_choice == 2:
+                self.expected_answers.append(-1)
+
+        print(self.probabilities)
+        print(self.expected_answers)
+        return self.probabilities
 
     def get_next_card(self):
         self.iterator += 1
@@ -45,6 +92,7 @@ class GameManager:
         return card
 
     def check_answer(self, state):
+        self.answers.append(state)
         if state == 1:
             if self.cards[self.iterator][1] > self.cards[self.iterator - 1][1]:
                 self.win_number += 1

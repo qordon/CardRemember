@@ -1,0 +1,54 @@
+<MenuScreen>:
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            # rgba: 19/255, 156/255, 55/255, 1
+            rgba: 40/255, 168/255, 237/255, 1
+            rgba: 26/255, 161/255, 40/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        rows: 3
+
+        BoxLayout:
+            size_hint: [1, .6]
+            padding: [0, 50, 0, 0]
+            Label:
+                font_size: 43
+                text: "Card Remember"
+
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: [1, 1]
+            padding: [0, 0, 0, 0]
+            Image:
+                source: "PNG/aces.png"
+                size_hint_x: .8
+                pos_hint: {'center_x': 0.5, 'center_y': 0}
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: [1, 1]
+            padding: [50, 0, 50, 0]
+            RoundedButton:
+                text: "Начать"
+                font_size: 36
+                size_hint_x: .5
+                pos_hint: {'center_x': 0.5, 'center_y': 1}
+
+                on_release:
+                    root.manager.current = 'game'
+
+<RoundedButton@Button>
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (140/255, 140/255, 140/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [15]

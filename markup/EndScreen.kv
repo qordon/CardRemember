@@ -1,0 +1,55 @@
+<EndScreen>:
+    orientation: 'vertical'
+    right_amount: right_amount
+    canvas.before:
+        Color:
+            rgba: 26/255, 161/255, 40/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    GridLayout:
+        rows: 3
+
+        BoxLayout:
+            size_hint: [1, .5]
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: 10
+            BoxLayout:
+                size_hint: [1, .05]
+                GridLayout:
+                    cols: 5
+                    rows: 1
+                    Label:
+                        text: "№"
+                        size_hint: [.3, 1]
+                    Label:
+                        size_hint: [.8, 1]
+                        text: ""
+                    Label:
+                        text: "Выбор"
+                    Label:
+                        text: "Ожидаемый\nвыбор"
+                        halign: 'center'
+                        valign: 'middle'
+                        pos_hint: {'center_x': 0.5, 'center_y': .5}
+                    Label:
+                        text: "Вер-сть"
+            BoxLayout:
+                ScrollView:
+                    size_hint: [1, 1]
+                    do_scroll_x: False
+                    do_scroll_y: True
+                    bar_width: 0
+                    GridLayout:
+                        id: results
+                        cols: 1
+                        spacing: 10
+                        size_hint_y: None
+                        height: self.minimum_height
+                        row_default_height: 150
+
+        BoxLayout:
+            size_hint: [1, .5]
+            Label:
+                id: right_amount

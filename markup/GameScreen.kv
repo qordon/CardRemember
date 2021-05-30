@@ -1,0 +1,57 @@
+<GameScreen>:
+    card_image: card_image
+    right_amount: right_amount
+
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            # rgba: 40/255, 168/255, 237/255, 1
+            rgba: 26/255, 161/255, 40/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        rows: 3
+        spacing: 0
+        BoxLayout:
+            size_hint: [1, 0.3]
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: [0.5, 1]
+            padding: [20, 0, 20, 0]
+            spacing: 10
+            Image:
+                size_hint: [1, 1]
+                id: card_image
+                source: 'PNG/2C.png'
+                size: self.texture_size
+            BoxLayout:
+                size_hint: [1, 0.3]
+                # orientation: 'vertical'
+                pos_hint: {'center_x': 0.5, 'center_y': .5}
+                # padding: [35, 10, 35, 10]
+                padding: [0, 15, 0, 15]
+                spacing: 10
+                RoundedButton:
+                    text: "<"
+                    font_size: "24"
+                    on_press:
+                        root.click(-1)
+                RoundedButton:
+                    text: "="
+                    font_size: "24"
+                    on_press:
+                        root.click(0)
+                RoundedButton:
+                    text: ">"
+                    font_size: "24"
+                    on_press:
+                        root.click(1)
+
+        BoxLayout:
+            size_hint: [1, 0.5]
+            Label:
+                id: right_amount
+                text: "Верно: 0"
+                font_size: "24"

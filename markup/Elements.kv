@@ -1,0 +1,39 @@
+<ChoiceBanner@BoxLayout>:
+    card_image: card_image
+    choice: choice
+    expected_choice: expected_choice
+    probability: probability
+    number_of_card: number_of_card
+    minimum_height: self.height
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: 26/255, 161/255, 40/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+    BoxLayout:
+        Label:
+            id: number_of_card
+            text: "1"
+            size_hint: [.3, 1]
+        BoxLayout:
+            size_hint: [.8, 1]
+            Image:
+                id: card_image
+                source: "PNG/2C.png"
+                size_hint: [.7, .7]
+                pos_hint: {'center_x': 0.5, 'center_y': .5}
+
+        Image:
+            id: choice
+            source: "PNG/equal.png"
+        Image:
+            id: expected_choice
+            source: "PNG/equal.png"
+            pos_hint: {'center_x': 0.5, 'center_y': .5}
+        Label:
+            id: probability
+            text: "Вероятность"
