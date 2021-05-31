@@ -33,7 +33,17 @@
         Image:
             id: expected_choice
             source: "PNG/equal.png"
-            pos_hint: {'center_x': 0.5, 'center_y': .5}
         Label:
             id: probability
-            text: "Вероятность"
+            text: ""
+
+<RoundedButton@Button>
+    background_color: (0,0,0,0)
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (140/255, 140/255, 140/255, 1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [15]

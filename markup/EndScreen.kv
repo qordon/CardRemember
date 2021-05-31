@@ -1,6 +1,7 @@
 <EndScreen>:
     orientation: 'vertical'
-    right_amount: right_amount
+    right_percent: right_percent
+    right_expected_choices_percent: right_expected_choices_percent
     canvas.before:
         Color:
             rgba: 26/255, 161/255, 40/255, 1
@@ -9,12 +10,52 @@
             size: self.size
     GridLayout:
         rows: 3
-
+        spacing: 15
         BoxLayout:
-            size_hint: [1, .5]
+            size_hint: [1, .4]
+            orientation: 'vertical'
+            padding: [0, 0, 0, 10]
+            Label:
+                text: "Статистика"
+                font_size: 24
+                font_name: 'Roboto'
+                size_hint: [1, .7]
+            BoxLayout:
+                orientation: 'vertical'
+                padding: [10, 0]
+                GridLayout:
+                    cols: 2
+                    spacing: 15
+                    Label:
+                        text: "Верных ответов:"
+                        font_size: 18
+                        font_name: 'Roboto'
+                        text_size: self.size
+                    Label:
+                        id: right_percent
+                        font_size: 18
+                        font_name: 'Roboto'
+                        size_hint: [.4, 1]
+                        text_size: self.size
+                GridLayout:
+                    cols: 2
+                    spacing: 15
+                    Label:
+                        text: "Верных ожидаемых решений:"
+                        font_size: 18
+                        font_name: 'Roboto'
+                        text_size: self.size
+                    Label:
+                        id: right_expected_choices_percent
+                        font_size: 18
+                        font_name: 'Roboto'
+                        size_hint: [.4, 1]
+                        text_size: self.size
+
         BoxLayout:
             orientation: 'vertical'
             spacing: 10
+            padding: [10, 0]
             BoxLayout:
                 size_hint: [1, .05]
                 GridLayout:
@@ -22,25 +63,29 @@
                     rows: 1
                     Label:
                         text: "№"
+                        font_name: 'Roboto'
                         size_hint: [.3, 1]
                     Label:
                         size_hint: [.8, 1]
                         text: ""
                     Label:
                         text: "Выбор"
+                        font_name: 'Roboto'
                     Label:
                         text: "Ожидаемый\nвыбор"
+                        font_name: 'Roboto'
                         halign: 'center'
                         valign: 'middle'
                         pos_hint: {'center_x': 0.5, 'center_y': .5}
                     Label:
                         text: "Вер-сть"
+                        font_name: 'Roboto'
             BoxLayout:
                 ScrollView:
                     size_hint: [1, 1]
                     do_scroll_x: False
                     do_scroll_y: True
-                    bar_width: 0
+                    bar_width: 2
                     GridLayout:
                         id: results
                         cols: 1
@@ -51,5 +96,18 @@
 
         BoxLayout:
             size_hint: [1, .5]
-            Label:
-                id: right_amount
+            spacing: 75
+            padding: [80, 50, 80, 50]
+            RoundedButton:
+                on_release: root.manager.current = 'menu'
+                Image:
+                    source: "PNG/menu.png"
+                    size: self.parent.width - 10, self.parent.height - 10
+                    pos: self.parent.x + 5, self.parent.y + 5
+
+            RoundedButton:
+                on_release: root.repeat_game()
+                Image:
+                    source: "PNG/repeat.png"
+                    size: self.parent.width - 10, self.parent.height - 10
+                    pos: self.parent.x + 5, self.parent.y + 5

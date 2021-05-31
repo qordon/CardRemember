@@ -10,8 +10,6 @@ from kivy.properties import ObjectProperty
 from kivy.storage.jsonstore import JsonStore
 
 from GameManager import GameManager
-from markup import kv
-
 
 Builder.load_file("markup/Elements.kv")
 Builder.load_file("markup/MenuScreen.kv")
@@ -21,7 +19,14 @@ Window.size = (390, 630)
 
 
 class MenuScreen(Screen):
-    pass
+    def __init__(self, game_manager, **kwargs):
+        super().__init__(**kwargs)
+        self.game_manager = game_manager
+
+    def start(self):
+        self.game_manager.clear()
+        screen_manager.get_screen('game').clear()
+        self.parent.current = 'game'
 
 
 class GameScreen(Screen):
@@ -30,6 +35,10 @@ class GameScreen(Screen):
         self.game_manager = game_manager
 
         self.card_image.source = "PNG/" + self.game_manager.get_current_card()[0]
+
+    def clear(self):
+        self.card_image.source = "PNG/" + self.game_manager.get_current_card()[0]
+        self.right_amount.text = "Верно: 0"
 
     def click(self, state):
         card, is_end = self.game_manager.get_next_card()
@@ -48,6 +57,7 @@ class EndScreen(Screen):
     def __init__(self, game_manager, **kwargs):
         super().__init__(**kwargs)
         self.game_manager = game_manager
+        self.right_expected_choices = 0
 
     def fill_banner_results(self):
         grid = self.ids["results"]
@@ -59,6 +69,7 @@ class EndScreen(Screen):
 
             if self.game_manager.answers[i] == self.game_manager.expected_answers[i]:
                 self.fill_choice(banner.choice, self.game_manager.answers[i])
+                self.right_expected_choices += 1
             else:
                 self.fill_choice_wrong(banner.choice, self.game_manager.answers[i])
 
@@ -88,36 +99,31 @@ class EndScreen(Screen):
             image.source = "PNG/" + "red-down-arrow.png"
 
     def fill_info(self):
-        self.right_amount.text = "Верно: " + str(game_manager.win_number)
-        # print(self.game_manager.answers)
-        probabilities = self.game_manager.calculate_probabilities()
+        self.clear()
+        self.right_percent.text = str(round(game_manager.win_number/36*100, 2)) + " %"
         self.fill_banner_results()
+        self.right_expected_choices_percent.text = str(round(self.right_expected_choices / 36 * 100, 2)) + " %"
         print(self.game_manager.cards)
+
+    def repeat_game(self):
+        self.game_manager.clear()
+        screen_manager.get_screen('game').clear()
+        self.parent.current = 'game'
+
+    def clear(self):
+        self.ids["results"].clear_widgets()
+        self.right_expected_choices = 0
 
 
 class ChoiceBanner(BoxLayout):
     pass
 
 
-class Test(Screen):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.game_manager = game_manager
-
-        grid = self.ids["testbanner"]
-        for i in range(12):
-            b = ChoiceBanner()
-            b.card_image.source = "PNG/KH.png"
-            # grid.bind(minimum_height=grid.setter('height'))
-            grid.add_widget(b)
-
-
 game_manager = GameManager()
 screen_manager = ScreenManager()
-screen_manager.add_widget(MenuScreen(name='menu'))
+screen_manager.add_widget(MenuScreen(game_manager, name='menu'))
 screen_manager.add_widget(GameScreen(game_manager, name='game'))
 screen_manager.add_widget(EndScreen(game_manager, name='end'))
-# screen_manager.add_widget(Test(name='end'))
 
 
 class CardRememberApp(App):
