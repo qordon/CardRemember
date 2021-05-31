@@ -40,21 +40,21 @@ class GameManager:
 
     def calculate_probabilities(self):
         card_costs = [6, 6, 6, 6,
-             7, 7, 7, 7,
-             8, 8, 8, 8,
-             9, 9, 9, 9,
-             10, 10, 10, 10,
-             11, 11, 11, 11,
-             12, 12, 12, 12,
-             13, 13, 13, 13,
-             14, 14, 14, 14]
+                      7, 7, 7, 7,
+                      8, 8, 8, 8,
+                      9, 9, 9, 9,
+                      10, 10, 10, 10,
+                      11, 11, 11, 11,
+                      12, 12, 12, 12,
+                      13, 13, 13, 13,
+                      14, 14, 14, 14]
 
         for i in range(len(self.cards) - 1):
             card_costs.remove(self.cards[i][1])
             greater, equal, less = (number_elements_greater_equal_or_less(card_costs, self.cards[i][1]))
             self.probabilities.append(tuple([round(greater / len(card_costs), 2),
-                                        round(equal / len(card_costs), 2),
-                                        round(less / len(card_costs), 2)]))
+                                             round(equal / len(card_costs), 2),
+                                             round(less / len(card_costs), 2)]))
             expected_choice = self.probabilities[-1].index(max(self.probabilities[-1]))
             if expected_choice == 0:
                 self.expected_answers.append(1)
@@ -63,14 +63,10 @@ class GameManager:
             elif expected_choice == 2:
                 self.expected_answers.append(-1)
 
-        print(self.probabilities)
-        print(self.expected_answers)
-
     def get_next_card(self):
         self.iterator += 1
         card = self.cards[self.iterator]
 
-        print("Iterator_1: " + str(self.iterator))
         if self.iterator == 35:
             self.is_end = True
             self.calculate_probabilities()
