@@ -1,8 +1,6 @@
 from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 
-from GameManager import GameManager
-
 
 class ChoiceBanner(BoxLayout):
     pass

@@ -1,7 +1,5 @@
 from kivy.uix.screenmanager import Screen
 
-from GameManager import GameManager
-
 
 class MenuScreen(Screen):
     def __init__(self, game_manager, **kwargs):
