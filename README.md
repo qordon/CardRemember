@@ -13,4 +13,4 @@ card will be next, greater or less than the current one.
 ## Launch
 
 - Use the website https://kivy.org for Kivy installation instructions
-- Clone the repository and run main.py with Kivy-aware Python
+- Clone the repository and run src/main.py with Kivy-aware Python
