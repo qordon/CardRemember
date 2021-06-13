@@ -10,3 +10,6 @@ class MenuScreen(Screen):
         self.game_manager.clear()
         self.parent.get_screen('game').clear()
         self.parent.current = 'game'
+
+    def go_to_description_page(self):
+        self.parent.current = 'description'

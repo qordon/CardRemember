@@ -68,3 +68,4 @@ class EndScreen(Screen):
     def clear(self):
         self.ids["results"].clear_widgets()
         self.right_expected_choices = 0
+
