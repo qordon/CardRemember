@@ -1,5 +1,6 @@
 from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
+import locales.ru as ru
 
 
 class ChoiceBanner(BoxLayout):
@@ -14,6 +15,13 @@ class EndScreen(Screen):
 
     def fill_info(self):
         self.clear()
+        # filling inscription for localization
+        self.right_answers_label.text = ru.right_answers_label
+        self.right_expected_choices_label.text = ru.right_expected_choices_label
+        self.choice_label.text = ru.choice_label
+        self.expected_choice_label.text = ru.expected_choice_label
+        self.probability_label.text = ru.probability_label
+
         self.fill_banner_results()
         self.fill_statistics()
 
@@ -68,4 +76,3 @@ class EndScreen(Screen):
     def clear(self):
         self.ids["results"].clear_widgets()
         self.right_expected_choices = 0
-

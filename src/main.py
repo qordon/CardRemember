@@ -1,6 +1,6 @@
 import os
 from kivy.app import App
-from kivy.uix.screenmanager import ScreenManager
+from kivy.uix.screenmanager import ScreenManager, NoTransition
 from kivy.core.window import Window
 from kivy.lang import Builder
 
@@ -21,7 +21,7 @@ Builder.load_file("../markup/DescriptionScreen.kv")
 Window.size = (390, 630)
 
 game_manager = GameManager()
-screen_manager = ScreenManager()
+screen_manager = ScreenManager(transition=NoTransition())
 screen_manager.add_widget(MenuScreen(game_manager, name='menu'))
 screen_manager.add_widget(GameScreen(game_manager, name='game'))
 screen_manager.add_widget(EndScreen(game_manager, name='end'))

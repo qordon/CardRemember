@@ -1,14 +1,14 @@
 from kivy.uix.screenmanager import Screen
-from configparser import ConfigParser
-
-config = ConfigParser()
-config.read("locales/ru.ini", "UTF-8")
+import locales.ru as ru
 
 
 class DescriptionScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.description.text = config.get("DESCRIPTION", "description")
-        self.game_process.text = config.get("GAME_PROCESS", "game_process")
-        self.results.text = config.get("RESULTS", "results")
+        self.description.text = ru.description
+        self.game_process.text = ru.game_process
+        self.results.text = ru.results
+
+    def back(self):
+        self.parent.current = 'menu'
 

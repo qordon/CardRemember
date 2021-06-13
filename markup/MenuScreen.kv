@@ -1,5 +1,7 @@
 <MenuScreen>:
     orientation: 'vertical'
+    start_label: start_label
+    rules_label: rules_label
     canvas.before:
         Color:
             rgba: 26/255, 161/255, 40/255, 1
@@ -32,7 +34,8 @@
             padding: [40, 10, 40, 100]
             spacing: 20
             RoundedButton:
-                text: "Начать"
+                id: start_label
+                text: ""
                 font_size: 36
                 font_name: 'Roboto'
                 size_hint_x: .5
@@ -42,7 +45,8 @@
                 on_release:
                     root.start()
             RoundedButton:
-                text: "Правила"
+                id: rules_label
+                text: ""
                 font_size: 34
                 font_name: 'Roboto'
                 size_hint_x: .5

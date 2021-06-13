@@ -3,55 +3,62 @@
     description: description
     game_process: game_process
     results: results
-    canvas.before:
-        Color:
-            rgba: 26/255, 161/255, 40/255, 1
-        Rectangle:
-            pos: self.pos
-            size: self.size
+    RelativeLayout:
+        canvas.before:
+            Color:
+                rgba: 26/255, 161/255, 40/255, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        ScrollView:
+            size_hint: [1, 1]
+            do_scroll_x: False
+            do_scroll_y: True
+            bar_width: 5
+            GridLayout:
+                id: results
+                cols: 1
 
-    ScrollView:
-        size_hint: [1, 1]
-        do_scroll_x: False
-        do_scroll_y: True
-        bar_width: 5
-        GridLayout:
-            id: results
-            cols: 1
-            spacing: 10
-            size_hint_y: None
-            height: self.minimum_height
-            row_default_height: 150
+                spacing: 20
+                size_hint_y: None
+                height: self.minimum_height
+                row_default_height: 150
 
-            BoxLayout:
-                orientation: 'vertical'
-                Label:
-                    text: "Описание"
-                    font_size: 24
-                Label:
-                    id: description
-                    text: ""
-                    font_size: 18
-                    halign: "left"
-                    text_size: root.width, None
+                BoxLayout:
+                    orientation: 'vertical'
+                    spacing: 10
 
-            BoxLayout:
-                orientation: 'vertical'
-                Label:
-                    text: "Ход игры"
-                    font_size: 24
-                Label:
-                    id: game_process
-                    text: ""
-                    font_size: 18
-                    markup: True
+                    Label:
+                        text: "Описание"
+                        font_size: 24
+                    DescriptionLabel:
+                        id: description
 
-            BoxLayout:
-                orientation: 'vertical'
-                Label:
-                    text: "Результаты"
-                    font_size: 24
-                Label:
-                    id: results
-                    text: ""
-                    font_size: 18
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: "Ход игры"
+                        font_size: 24
+                    DescriptionLabel:
+                        id: game_process
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: "Результаты"
+                        font_size: 24
+                    DescriptionLabel:
+                        id: results
+        BoxLayout:
+            size_hint: [1, .2]
+            padding: [130, 30]
+            RoundedButton:
+                on_release:
+                    root.back()
+                Image:
+                    source: "images/icons/back.png"
+                    size: self.parent.width - 10, self.parent.height - 10
+                    pos: self.parent.x + 5, self.parent.y + 5
