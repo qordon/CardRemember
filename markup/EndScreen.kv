@@ -1,7 +1,14 @@
 <EndScreen>:
     orientation: 'vertical'
+
     right_percent: right_percent
     right_expected_choices_percent: right_expected_choices_percent
+    right_answers_label: right_answers_label
+    right_expected_choices_label: right_expected_choices_label
+    choice_label: choice_label
+    expected_choice_label: expected_choice_label
+    probability_label: probability_label
+
     canvas.before:
         Color:
             rgba: 26/255, 161/255, 40/255, 1
@@ -27,7 +34,8 @@
                     cols: 2
                     spacing: 15
                     Label:
-                        text: "Верных ответов:"
+                        id: right_answers_label
+                        # text: "Верных ответов:"
                         font_size: 18
                         font_name: 'Roboto'
                         text_size: self.size
@@ -41,7 +49,8 @@
                     cols: 2
                     spacing: 15
                     Label:
-                        text: "Верных ожидаемых решений:"
+                        id: right_expected_choices_label
+                        text: ""
                         font_size: 18
                         font_name: 'Roboto'
                         text_size: self.size
@@ -69,16 +78,16 @@
                         size_hint: [.8, 1]
                         text: ""
                     Label:
-                        text: "Выбор"
+                        id: choice_label
                         font_name: 'Roboto'
                     Label:
-                        text: "Ожидаемый\nвыбор"
+                        id: expected_choice_label
                         font_name: 'Roboto'
                         halign: 'center'
                         valign: 'middle'
                         pos_hint: {'center_x': 0.5, 'center_y': .5}
                     Label:
-                        text: "Вер-сть"
+                        id: probability_label
                         font_name: 'Roboto'
             BoxLayout:
                 ScrollView:

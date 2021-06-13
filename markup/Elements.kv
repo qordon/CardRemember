@@ -47,3 +47,17 @@
             size: self.size
             pos: self.pos
             radius: [15]
+
+<DescriptionLabel@Label>
+    text: ""
+    font_size: 18
+    halign: "left"
+    text_size: root.width - 15, None
+
+<ScreenManager>:
+    canvas.before:
+        Color:
+            rgba: 26/255, 161/255, 40/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size

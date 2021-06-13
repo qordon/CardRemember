@@ -16,6 +16,20 @@
         spacing: 0
         BoxLayout:
             size_hint: [1, 0.3]
+            spacing: 50
+            padding: [100, 30]
+            RoundedButton:
+                on_release: root.manager.current = 'menu'
+                Image:
+                    source: "images/icons/back.png"
+                    size: self.parent.width - 10, self.parent.height - 10
+                    pos: self.parent.x + 5, self.parent.y + 5
+            RoundedButton:
+                on_release: root.repeat_game()
+                Image:
+                    source: "images/icons/repeat.png"
+                    size: self.parent.width - 10, self.parent.height - 10
+                    pos: self.parent.x + 5, self.parent.y + 5
         BoxLayout:
             orientation: 'vertical'
             size_hint: [0.5, 1]
@@ -35,23 +49,24 @@
                 spacing: 10
                 RoundedButton:
                     text: "<"
-                    font_size: "24"
+                    font_size: "56"
                     on_press:
                         root.click(-1)
                 RoundedButton:
                     text: "="
-                    font_size: "24"
+                    font_size: "56"
                     on_press:
                         root.click(0)
                 RoundedButton:
                     text: ">"
-                    font_size: "24"
+                    font_size: "56"
                     on_press:
                         root.click(1)
 
+
         BoxLayout:
-            size_hint: [1, 0.5]
+            size_hint: [1, 0.3]
             Label:
                 id: right_amount
-                text: "Верно: 0"
+                text: ""
                 font_size: "24"
